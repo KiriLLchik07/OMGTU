@@ -1,0 +1,38 @@
+using System;
+class HelloWorld {
+    static void Main() {
+       
+    //Задача №1
+       
+        
+        int a = Convert.ToInt32(Console.ReadLine());
+        int b = Convert.ToInt32(Console.ReadLine());
+        
+        a = a + b;
+        b = a - b;
+        a = a - b;
+        System.Console.WriteLine(a);
+        System.Console.WriteLine(b); 
+
+    //Задача №2
+
+     int k = Convert.ToInt32(Console.ReadLine());
+     int a = k/3600;
+     int b = (k-a*3600)/60;
+     int c = k-a*3600 - b*60;
+     System.Console.WriteLine("Часы: {0}, Минуты: {1}, Секунды: {2}",a,b,c); 
+     
+
+    //Задача №3 
+
+    int a = Convert.ToInt32(Console.ReadLine());
+    int b = Convert.ToInt32(Console.ReadLine());
+
+    int c = ((a + b - Math.Abs(a-b))/2);
+    int d = ((a + b + Math.Abs(a-b))/2);
+
+    System.Console.WriteLine("Минимальное: " + c);
+    System.Console.WriteLine("Максимальное: " + d);
+
+    }
+}
