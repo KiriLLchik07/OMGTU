@@ -36,9 +36,9 @@ class Program
                 string date = splitData[2];
                 double countMinuteOfCall = Convert.ToDouble(splitData[3]);
 
-                if(date == dataOfCall && !listData.Contains(date))
+                if (date == dataOfCall && !listData.Contains(date))
                 {
-                    if(countMinCall.ContainsKey(adresat))
+                    if (countMinCall.ContainsKey(adresat))
                     {
                         countMinCall[adresat] = Convert.ToDouble(countMinCall[adresat]) + countMinuteOfCall;
                     }
@@ -49,21 +49,21 @@ class Program
             string phone = "";
             double max = 0;
 
-            foreach(DictionaryEntry entry in countMinCall) 
-            { 
-                if(Convert.ToDouble(entry.Value) > max)
+            foreach (DictionaryEntry entry in countMinCall)
+            {
+                if (Convert.ToDouble(entry.Value) > max)
                 {
                     max = Convert.ToDouble(entry.Value);
                     phone = Convert.ToString(entry.Key);
                 }
             }
 
-            if(!result.ContainsKey(dataOfCall)) result.Add(dataOfCall, phone);
+            if (!result.ContainsKey(dataOfCall)) result.Add(dataOfCall, phone);
 
             listData.Add(dataOfCall);
         }
 
-        Console.WriteLine("На какой номер чаще всего звонили по датам: ");
+        Console.WriteLine("С кем больше всего разговаривали по датам: ");
         foreach (DictionaryEntry entry in result)
         {
             Console.WriteLine($"Дата: {entry.Key}\t Номер телефона: {entry.Value}");
