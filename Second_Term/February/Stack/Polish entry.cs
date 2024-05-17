@@ -2,57 +2,72 @@ class Program
 {
     static void Main()
     {
-        Console.WriteLine("Ввелите выражение в обратой польской записи: ");
-        string pollish_string = Console.ReadLine();
+        Console.WriteLine("Введите выражение в обратной польской нотации:");
+        string str = Console.ReadLine();
 
-        var elements = pollish_string.Split(' ');
-      
+        var notation = str.Split();
+        string[] operations = new string[] { "+", "-", "*", "/" };
+
         Stack<double> stack = new Stack<double>();
 
-        foreach (var element in elements)
+        bool valid = true;
+
+        foreach (string elem in notation)
         {
-            if (element == "+" || element == "-" || element == "*" || element == "/")
+            bool isDouble = double.TryParse(elem, out double number);
+            if (isDouble)
             {
-                double a = (double)stack.Pop();
-                double b = (double)stack.Pop();
-
-              try
-                {
-                    switch (element)
-                    {
-                        case "+":
-                            stack.Push(a + b); break;
-
-                        case "-":
-                            stack.Push(a - b); break;
-
-                        case "*":
-                            stack.Push(a * b); break;
-
-                        case "/":
-                            if (a == 0) throw new Exception("На ноль делить нельзя!");
-
-                            stack.Push(a / b); break;
-                    }
-                }
-
-                catch (Exception e) { Console.WriteLine(e.Message); }
-
+                stack.Push(number);
             }
-            else
+            else if (Array.IndexOf(operations, elem) != -1)
             {
-                try
+                if (stack.Count < 2)
                 {
-                    stack.Push(double.Parse(element));
+                    valid = false;
+                    break;
                 }
 
-                catch
+                double n1 = stack.Pop();
+                double n2 = stack.Pop();
+
+                if (elem == "+")
                 {
-                    Console.WriteLine("Запись введена неверно!");
+                    stack.Push(n2 + n1);
+                }
+                else if (elem == "-")
+                {
+                    stack.Push(n2 - n1);
+                }
+                else if (elem == "*")
+                {
+                    stack.Push(n2 * n1);
+                }
+                else if (elem == "/")
+                {
+                    if (n1 == 0)
+                    {
+                        throw new DivideByZeroException("Нельзя делить на ноль!");
+                    }
+                    else
+                    {
+                        stack.Push(n2 / n1);
+                    }
                 }
             }
         }
 
-        Console.WriteLine($"Результат: {stack.Peek()}");
+        if (stack.Count != 1)
+        {
+            valid = false;
+        }
+
+        if (valid)
+        {
+            Console.WriteLine($"Результат: {stack.Peek()}");
+        }
+        else
+        {
+            Console.WriteLine("Запись введена неверно!");
+        }
     }
 }
