@@ -8,7 +8,7 @@ public class Product
     public string Name { get; set; }
     public string Category { get; set; }
     public int Quantity { get; set; }
-    public decimal Price { get; set; }
+    public double Price { get; set; }
     public string Warehouse { get; set; }
 }
 
@@ -53,7 +53,7 @@ public class Program
             Console.WriteLine($"Склад {averagePrice.Warehouse}: {averagePrice.AveragePrice}");
         }
 
-        decimal totalAveragePrice = products.Average(p => p.Price);
+        double totalAveragePrice = products.Average(p => p.Price);
         Console.WriteLine($"\nСредняя цена по всем складам: {totalAveragePrice}\n");
 
         var cheapestProduct = products.OrderBy(p => p.Price).First();
